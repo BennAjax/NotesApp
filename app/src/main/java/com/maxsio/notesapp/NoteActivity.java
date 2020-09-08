@@ -1,9 +1,11 @@
 package com.maxsio.notesapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
+    public final static String NOTE_INFO = "com.maxsio.notesapp.NOTE_INFO";
+    private NoteInfo mNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,26 @@ public class NoteActivity extends AppCompatActivity {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourses.setAdapter(adapterCourses);
 
+        readDisplayStateValues();
+
+        EditText textNoteTitle = findViewById(R.id.text_note_title);
+        EditText textNoteText = findViewById(R.id.text_notes_text);
+
+        displayNotes(spinnerCourses, textNoteTitle, textNoteText);
+    }
+
+    private void displayNotes(Spinner spinnerCourses, EditText textNoteTitle, EditText textNoteText) {
+        List<CourseInfo> courses = DataManager.getInstance().getCourses();
+        int courseIndex = courses.indexOf(mNote.getCourse());
+        spinnerCourses.setSelection(courseIndex);
+        textNoteTitle.setText(mNote.getTitle());
+        textNoteText.setText(mNote.getText());
+    }
+
+
+    private void readDisplayStateValues() {
+        Intent intent = getIntent();
+        mNote = intent.getParcelableExtra(NOTE_INFO);
     }
 
     @Override
