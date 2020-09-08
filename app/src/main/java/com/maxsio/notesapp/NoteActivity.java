@@ -16,6 +16,7 @@ import java.util.List;
 public class NoteActivity extends AppCompatActivity {
     public final static String NOTE_INFO = "com.maxsio.notesapp.NOTE_INFO";
     private NoteInfo mNote;
+    private Boolean mIsNewNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class NoteActivity extends AppCompatActivity {
         EditText textNoteTitle = findViewById(R.id.text_note_title);
         EditText textNoteText = findViewById(R.id.text_notes_text);
 
+        if (!mIsNewNote)
         displayNotes(spinnerCourses, textNoteTitle, textNoteText);
     }
 
@@ -51,6 +53,8 @@ public class NoteActivity extends AppCompatActivity {
     private void readDisplayStateValues() {
         Intent intent = getIntent();
         mNote = intent.getParcelableExtra(NOTE_INFO);
+
+        mIsNewNote = mNote == null;
     }
 
     @Override
