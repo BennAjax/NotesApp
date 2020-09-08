@@ -1,6 +1,9 @@
 package com.maxsio.notesapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,12 +27,20 @@ public class NoteListActivity extends AppCompatActivity {
     }
 
     private void initializeDisplayContent() {
-        ListView listView = findViewById(R.id.list_notes);
+        ListView listNotes = findViewById(R.id.list_notes);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         ArrayAdapter<NoteInfo> adapterNotes =
                 new ArrayAdapter<NoteInfo>(this, android.R.layout.simple_list_item_1, notes);
 
-        listView.setAdapter(adapterNotes);
+        listNotes.setAdapter(adapterNotes);
+
+        listNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
