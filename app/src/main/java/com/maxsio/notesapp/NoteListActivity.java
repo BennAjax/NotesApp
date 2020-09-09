@@ -36,7 +36,6 @@ public class NoteListActivity extends AppCompatActivity {
 
         initializeDisplayContent();
 
-
     }
 
     @Override
