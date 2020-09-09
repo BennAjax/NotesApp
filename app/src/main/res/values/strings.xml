@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NotesApp</string>
     <string name="action_send_mail">Send As Mail</string>
+    <string name="action_cancel">Cancel</string>
     <string name="edit_notes">Edit Notes</string>
 
 
