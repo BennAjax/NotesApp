@@ -1,2 +1,2 @@
 # NotesApp
-A Notes Taking App
+A great Notes Taking Application
